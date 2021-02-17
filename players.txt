@@ -1,2 +1,2 @@
-Tiki_Monkey,0,0
-Barbara,0,0
+Tiki_Monkey,100,20
+Barbara,500,1000

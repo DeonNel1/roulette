@@ -1,13 +1,3 @@
-buildscript {
-	
-
-	repositories {
-		maven { url "https://plugins.gradle.org/m2/" }
-		gradlePluginPortal()
-        jcenter()
-	}	
-}
-
 	plugins {	
 	id 'java'
 	id 'idea'
@@ -55,3 +45,6 @@ task copyPlayerFile(type: Copy) {
 jar.dependsOn copyPlayerFile
 
 
+sourceSets {	
+	main.java.srcDirs += 'src'
+}
