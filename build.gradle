@@ -1,0 +1,57 @@
+buildscript {
+	
+
+	repositories {
+		maven { url "https://plugins.gradle.org/m2/" }
+		gradlePluginPortal()
+        jcenter()
+	}	
+}
+
+	plugins {	
+	id 'java'
+	id 'idea'
+	id 'application'
+}
+
+ext {
+   javaMainClass = "com.casino.RouletteApplication"
+}
+
+group = 'com.playsafe'
+version = '1.0.0'
+sourceCompatibility = '8'
+
+
+repositories {
+	mavenCentral()
+}
+
+
+application {
+	mainClassName = javaMainClass
+}
+
+jar {	
+    manifest {
+        attributes(
+            "Main-Class": javaMainClass
+        )
+    }	
+}
+
+task runWithExecJarOnClassPath(type: Exec) {	
+    dependsOn jar	
+    group = "Execution"
+    description = "Run the mainClass from the output jar in classpath with ExecTask"
+    commandLine "java", "-classpath", jar.archiveFile.get(), javaMainClass
+}
+
+task copyPlayerFile(type: Copy) {
+    from file("./players.txt")
+    into file("$buildDir/libs")
+}
+
+jar.dependsOn copyPlayerFile
+
+
